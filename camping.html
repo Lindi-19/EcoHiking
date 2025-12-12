@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Camping Guides</title>
+<style>
+body { font-family: Arial, sans-serif; margin: 30px; background: #143234; }
+  .title { text-align: center; margin-bottom: 20px;color: aliceblue; }
+  .intro { text-align: center; margin-bottom: 30px;color: aliceblue; }
+  .categories { text-align: center; margin-bottom: 20px; color: aliceblue; }
+  .categories button { padding: 8px 16px; margin: 5px; border: none; background: #ddd; border-radius: 6px; cursor: pointer; }
+  .filters { text-align: center; margin-bottom: 25px; }
+  .guides-container { 
+  display: flex; 
+  flex-wrap: wrap; 
+  justify-content: center; 
+  gap: 25px; 
+  width: 100%; 
+
+}
+
+  .guide-card { background: white; width: 45%; padding: 15px; border-radius: 10px; cursor: pointer; transition: .2s; box-sizing: border-box; }
+ .guide-card img { 
+  width: 100%; 
+  border-radius: 12px; 
+  height: 300px; 
+  object-fit: cover; 
+}
+
+  .guide-card:hover { transform: scale(1.03); box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
+  .center-card { width: 60%; }
+.pagination {
+  text-align: center;
+  margin-top: 50px; 
+}
+
+  .pagination button { padding: 8px 14px; margin: 4px; border-radius: 5px; border: none; background: #ddd; cursor: pointer; }
+  .pagination button:hover { background: #bbb; }
+  .active-page { background: #333; color: white; }
+  @media (max-width:800px){
+    .guide-card, .center-card { width: 100% !important; }
+    .guide-card img{height:180px}
+  }
+</style>
+</head>
+<body>
+
+<h1 class="title">Camping Guides</h1>
+<div class="intro">
+<p>Click a guide to see full details, equipment, dates, and ticket options (student -30%).</p>
+</div>
+<div class="categories">
+  <button onclick="openCategory('guides.html')">Hiking</button>
+  <button onclick="openCategory('camping.html')">Camping</button>
+  <button onclick="openCategory('adventures.html')">Adventures</button>
+  <button onclick="openCategory('winter.html')">Winter Trips</button>
+</div>
+
+<section class="guides-container" id="guides"></section>
+
+<script>
+   function openCategory(url) {
+    // Kjo hap faqen e veçantë për kategorinë
+    window.location.href = url;
+}
+const campingGuides = [
+  {date:"10 Apr 2026", loc:"Liqeni i Leqanatit", price:"12€", img:"images/liqeni-leqanatit.jpg"},
+  {date:"22 Sep 2026", loc:"Oshlak, Bjeshkët e Sharrit", price:"18€", img:"images/oshlak-bjeshket.jpg"}
+];
+
+function loadGuides() {
+  const container = document.getElementById("guides");
+  container.innerHTML = "";
+  campingGuides.forEach((g,index)=>{
+    const isCenter = campingGuides.length % 2 ===1 && index === campingGuides.length-1;
+    const card = document.createElement("div");
+    card.className = isCenter ? "guide-card center-card" : "guide-card";
+    card.onclick = ()=>openGuide(g.date,g.loc,g.price,g.img);
+    card.innerHTML = `<img src="${g.img}" alt="${g.loc}">
+                      <h3>${g.date} – ${g.loc}</h3>
+                      <p>Price: ${g.price}</p>`;
+    container.appendChild(card);
+  });
+}
+
+function openGuide(date,location,price,img){
+  window.location.href=`camping-description.html?date=${encodeURIComponent(date)}&location=${encodeURIComponent(location)}&price=${encodeURIComponent(price)}&img=${encodeURIComponent(img)}`;
+}
+
+loadGuides();
+</script>
+
+</body>
+</html>
