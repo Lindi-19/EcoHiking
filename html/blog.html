@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eco Hiking Blog</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+body{margin:0;font-family:Poppins,sans-serif;background:#0b1416;color:#e8eeee}
+.container{max-width:1100px;margin:auto;padding:24px}
+header{display:flex;justify-content:space-between;align-items:center;margin-bottom:30px}
+h1{margin:0}
+.nav a{color:#e8eeee;text-decoration:none;margin-left:16px;font-size:14px}
+
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.card{background:rgba(255,255,255,0.03);border-radius:8px;overflow:hidden}
+.card img{width:100%;height:180px;object-fit:cover}
+.card .content{padding:16px}
+.card h3{margin:0 0 8px;font-size:18px}
+.meta{font-size:12px;color:rgba(255,255,255,0.6)}
+.card p{font-size:14px;color:rgba(255,255,255,0.8)}
+.card a{display:inline-block;margin-top:10px;color:#d4c06b;text-decoration:none;font-weight:600}
+
+@media(max-width:900px){.grid{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+
+<body>
+<div class="container">
+
+<header>
+  <nav class="nav">
+  <a href="#">Guides</a>
+  <a href="#">Shtigje</a>
+  <a href="#">Pajisje</a>
+  <a href="#" onclick="openForm()">Posto Blog</a>
+</nav>
+
+</header>
+
+<div id="postForm" style="display:none;margin-bottom:30px">
+  <input id="title" placeholder="Titulli" style="width:100%;padding:10px;margin-bottom:10px">
+  <input id="image" placeholder="URL e fotos" style="width:100%;padding:10px;margin-bottom:10px">
+  <textarea id="desc" placeholder="Përshkrimi" style="width:100%;padding:10px;height:100px"></textarea>
+  <button onclick="addBlog()" style="margin-top:10px;padding:10px;background:#d4c06b;border:none;font-weight:600">
+    Publiko
+  </button>
+</div>
+
+
+<section class="grid" id="blogGrid">
+
+<article class="card">
+  <img src="images/blog1.jpg" alt="">
+  <div class="content">
+    <span class="meta">Fillestar · 5 min</span>
+    <h3>Çka me marrë në hiking 1-ditor</h3>
+    <p>Checklist praktike për ecje pa stres dhe pa harru gjëra të rëndësishme.</p>
+    <a href="#">Lexo më shumë</a>
+  </div>
+</article>
+
+<article class="card">
+  <img src="images/blog2.jpg" alt="">
+  <div class="content">
+    <span class="meta">Siguri · 7 min</span>
+    <h3>Gabimet që bëjnë fillestarët</h3>
+    <p>Gabime reale që mund të prishin një ecje të bukur në natyrë.</p>
+    <a href="#">Lexo më shumë</a>
+  </div>
+</article>
+
+<article class="card">
+  <img src="images/blog3.jpg" alt="">
+  <div class="content">
+    <span class="meta">Shtigje · 10 min</span>
+    <h3>Shtigje të bukura në Kosovë</h3>
+    <p>Ide për ecje fundjave me pamje të bukura dhe vështirësi të ndryshme.</p>
+    <a href="#">Lexo më shumë</a>
+  </div>
+</article>
+
+</section>
+
+</div>
+
+<!-- Posto Blog -->
+<script>
+function openForm(){
+  const f = document.getElementById("postForm")
+  f.style.display = f.style.display === "none" ? "block" : "none"
+}
+
+function addBlog(){
+  const title = document.getElementById("title").value
+  const image = document.getElementById("image").value
+  const desc = document.getElementById("desc").value
+
+  if(!title || !desc) return alert("Plotëso të gjitha fushat")
+
+  const card = `
+  <article class="card">
+    <img src="${image || 'images/blog1.jpg'}">
+    <div class="content">
+      <span class="meta">Community · 3 min</span>
+      <h3>${title}</h3>
+      <p>${desc}</p>
+      <a href="#">Lexo më shumë</a>
+    </div>
+  </article>
+  `
+
+  document.getElementById("blogGrid").insertAdjacentHTML("afterbegin", card)
+
+  document.getElementById("title").value = ""
+  document.getElementById("image").value = ""
+  document.getElementById("desc").value = ""
+}
+</script>
+
+</body>
+</html>
