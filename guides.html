@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Travel Guides</title>
+<style>
+ 
+  body { font-family: Arial, sans-serif; margin: 30px; background: #143234; }
+  .title { text-align: center; margin-bottom: 20px;color: aliceblue; }
+  .intro { text-align: center; margin-bottom: 30px;color: aliceblue; }
+  .categories { text-align: center; margin-bottom: 20px; color: aliceblue; }
+  .categories button { padding: 8px 16px; margin: 5px; border: none; background: #ddd; border-radius: 6px; cursor: pointer; }
+  .filters { text-align: center; margin-bottom: 25px; }
+  .guides-container { 
+  display: flex; 
+  flex-wrap: wrap; 
+  justify-content: center; 
+  gap: 25px; 
+  width: 100%; 
+
+}
+
+  .guide-card { background: white; width: 45%; padding: 15px; border-radius: 10px; cursor: pointer; transition: .2s; box-sizing: border-box; }
+ .guide-card img { 
+  width: 100%; 
+  border-radius: 12px; 
+  height: 300px; 
+  object-fit: cover; 
+}
+
+  .guide-card:hover { transform: scale(1.03); box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
+  .center-card { width: 60%; }
+.pagination {
+  text-align: center;
+  margin-top: 50px; 
+}
+
+  .pagination button { padding: 8px 14px; margin: 4px; border-radius: 5px; border: none; background: #ddd; cursor: pointer; }
+  .pagination button:hover { background: #bbb; }
+  .active-page { background: #333; color: white; }
+  @media (max-width:800px){
+    .guide-card, .center-card { width: 100% !important; }
+    .guide-card img{height:180px}
+  }
+</style>
+</head>
+<body>
+
+<h1 class="title">Travel Guides</h1>
+
+<div class="intro">
+  <h2>Discover Your Next Adventure</h2>
+  <p>Click a guide to see full details, equipment list, map, and ticket options (student -30%).</p>
+</div>
+
+<div class="categories">
+  <button onclick="openCategory('guides.html')">Hiking</button>
+  <button onclick="openCategory('camping.html')">Camping</button>
+  <button onclick="openCategory('adventures.html')">Adventures</button>
+  <button onclick="openCategory('winter.html')">Winter Trips</button>
+</div>
+
+
+
+<!-- GUIDES -->
+<section class="guides-container" id="guides">
+
+</section>
+
+<!-- PAGINATION -->
+<div class="pagination">
+  <button onclick="loadPage(1)" id="page1">1</button>
+  <button onclick="loadPage(2)" id="page2">2</button>
+  <button onclick="loadPage(3)" id="page3">3</button>
+</div>
+
+<script>
+    function openCategory(url) {
+    // Kjo hap faqen e veçantë për kategorinë
+    window.location.href = url;
+}
+
+/* =========================
+   Data: page1, page2, page3
+   ========================= */
+const page1Guides = [
+  {date:"10 Jan 2026", loc:"Liqeni i Leqanatit", price:"15€", img:"images/liqeni-leqanatit.jpg"},
+  {date:"22 Jan 2026", loc:"Bjeshkët e Sharrit", price:"15€", img:"images/bjeshket-sharr.jpg"},
+  {date:"05 Feb 2026", loc:"Maja e Gjeravicës", price:"28€", img:"images/maja-gjeravices.jpg"}
+];
+
+
+const page2Guides = [
+  {date:"15 Feb 2026", loc:"Liqeni & Ujvara e Zanave", price:"15€", img:"images/Liqeni-zanave.png"},
+  {date:"01 Mar 2026", loc:"Shtegu i Gështenjave", price:"10€", img:"images/shtegugeshtenjav.jpg"},
+  {date:"12 Mar 2026", loc:"Guri i Kuq", price:"16€", img:"images/guri-kuq.jpg"}
+];
+
+const page3Guides = [
+  {date:"25 Mar 2026", loc:"Sharri i Brodit", price:"20€", img:"images/Brod_Dragash.jpg"}
+];
+
+/* current page */
+let currentPage = 1;
+
+/* loadPage: supports 3 pages */
+function loadPage(page) {
+  currentPage = page;
+  // active button style
+  document.getElementById("page1").classList.remove("active-page");
+  document.getElementById("page2").classList.remove("active-page");
+  document.getElementById("page3").classList.remove("active-page");
+  const btn = document.getElementById("page"+page);
+  if(btn) btn.classList.add("active-page");
+
+  const container = document.getElementById("guides");
+  container.innerHTML = "";
+
+  let data;
+  if (page === 1) data = page1Guides;
+  else if (page === 2) data = page2Guides;
+  else if (page === 3) data = page3Guides;
+  else data = page1Guides;
+
+  // Build layout: two per row, last center card if odd count
+  data.forEach((g, index) => {
+    // center-card logic: if this is the only one in row and index is last and total%2==1 on desktop, make center
+    const total = data.length;
+    let isCenter = false;
+    if (total % 2 === 1 && index === total - 1) isCenter = true;
+
+    const cls = isCenter ? "guide-card center-card" : "guide-card";
+    const card = document.createElement("div");
+    card.className = cls;
+    card.onclick = () => openGuide(g.date, g.loc, g.price, g.img);
+    card.innerHTML = `
+      <img src="${g.img}" alt="${g.loc}">
+      <h3>${g.date} – ${g.loc}</h3>
+      <p>Price: ${g.price}</p>
+    `;
+    container.appendChild(card);
+  });
+}
+
+/* go to description page with parameters */
+function openGuide(date, location, price, img) {
+  const url = `guides-description.html?date=${encodeURIComponent(date)}&location=${encodeURIComponent(location)}&price=${encodeURIComponent(price)}&img=${encodeURIComponent(img)}`;
+  window.location.href = url;
+}
+
+/* placeholder sort */
+function sortGuides() {
+  alert("Sorting coming soon!");
+}
+
+/* initial load */
+loadPage(1);
+</script>
+
+</body>
+</html>
