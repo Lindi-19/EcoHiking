@@ -111,17 +111,7 @@
     document.getElementById("loginForm").style.display = "block";
   }
 
-  function login() {
-    let user = document.getElementById("loginUser").value;
-    let pass = document.getElementById("loginPass").value;
-
-    if (user === "" || pass === "") {
-      alert("Ju lutem plotësoni të gjitha fushat!");
-    } else {
-      alert("Login u krye me sukses!");
-    }
-  }
-
+  // REGISTER
   function register() {
     let user = document.getElementById("regUser").value;
     let email = document.getElementById("regEmail").value;
@@ -129,12 +119,40 @@
 
     if (user === "" || email === "" || pass === "") {
       alert("Ju lutem plotësoni të gjitha fushat!");
+      return;
+    }
+
+    // ruajtja e account-it
+    localStorage.setItem("username", user);
+    localStorage.setItem("password", pass);
+    localStorage.setItem("email", email);
+
+    alert("Account u krijua me sukses!");
+    showLogin();
+  }
+
+  // LOGIN
+  function login() {
+    let user = document.getElementById("loginUser").value;
+    let pass = document.getElementById("loginPass").value;
+
+    let savedUser = localStorage.getItem("username");
+    let savedPass = localStorage.getItem("password");
+
+    if (user === "" || pass === "") {
+      alert("Ju lutem plotësoni të gjitha fushat!");
+      return;
+    }
+
+    if (user === savedUser && pass === savedPass) {
+      localStorage.setItem("loggedIn", "true");
+      window.location.href = "index.html"; // 👉 redirect
     } else {
-      alert("Account u krijua me sukses!");
-      showLogin();
+      alert("Username ose password nuk është i saktë!");
     }
   }
 </script>
+
 
 </body>
 </html>
