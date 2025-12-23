@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
     <script src="https://kit.fontawesome.com/fddc30fb79.js" crossorigin="anonymous"></script>
 <title>Sign In</title>
-<link rel="stylesheet" href="singin.css">
+<link rel="stylesheet" href="css/singin.css">
 </head>
 
 <body>
@@ -33,6 +33,8 @@
     <div class="card">
         <div class="left">
             <div class="login-box">
+                <div id="alertBox" style="display:none; margin-bottom:15px; color:white;"></div>
+
                 <h1>Welcome Back!</h1>
                 <p class="lead">Please enter your details</p>
                 <form id="signinForm">
@@ -62,37 +64,43 @@
 </div>
 
 <script>
-document.getElementById("signinForm").addEventListener("submit", function(e){
+async function sha256(message) {
+    const msgBuffer = new TextEncoder().encode(message);
+    const hashBuffer = await crypto.subtle.digest("SHA-256", msgBuffer);
+    const hashArray = Array.from(new Uint8Array(hashBuffer));
+    return hashArray.map(b => b.toString(16).padStart(2, "0")).join("");
+}
+
+document.getElementById("signinForm").addEventListener("submit", async function(e){
     e.preventDefault();
 
-    const email = document.getElementById("usename").value;
+    const username = document.getElementById("username").value;
     const password = document.getElementById("password").value;
     const alertBox = document.getElementById("alertBox");
 
-    // merr user-in nga localStorage
     const savedUser = JSON.parse(localStorage.getItem("user"));
 
     alertBox.style.display = "block";
 
     if (!savedUser) {
-        alertBox.className = "alert error";
         alertBox.innerText = "❌ Nuk ekziston asnjë account. Ju lutem regjistrohuni.";
         return;
     }
 
-    if (email !== savedUser.usename || password !== savedUser.password) {
-        alertBox.className = "alert error";
-        alertBox.innerText = "❌ Email ose password është gabim.";
+    const hashedPassword = await sha256(password);
+
+    if (username !== savedUser.username || hashedPassword !== savedUser.password) {
+        alertBox.innerText = "❌ Username ose password është gabim.";
         return;
     }
 
-    // sukses
-    alertBox.className = "alert success";
     alertBox.innerText = "✅ Login i suksesshëm! Duke ju dërguar në faqen kryesore...";
 
     setTimeout(() => {
         window.location.href = "index.html";
-    }, 1500);
+    }, 1200);
 });
 </script>
+</body>
+</html>
 

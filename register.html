@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
     <script src="https://kit.fontawesome.com/fddc30fb79.js" crossorigin="anonymous"></script>
 <title>Register</title>
-<link rel="stylesheet" href="register.css">
+<link rel="stylesheet" href="css/register.css">
 </head>
 <body>
 
@@ -76,19 +76,38 @@ async function sha256(message) {
     const hashArray = Array.from(new Uint8Array(hashBuffer));
     return hashArray.map(b => b.toString(16).padStart(2, "0")).join("");
 }
+
 document.getElementById("registerForm").addEventListener("submit", async (e) => {
     e.preventDefault();
+
+    const firstname = document.getElementById("firstname").value;
+    const lastname = document.getElementById("lastname").value;
+    const username = document.getElementById("username").value;
     const pass = document.getElementById("password").value;
     const confirm = document.getElementById("confirmpassword").value;
+
     if (pass !== confirm) {
         alert("Passwords do not match!");
         return;
     }
+
     const hashedPassword = await sha256(pass);
-    console.log("Password HASH:", hashedPassword);
-    alert("Account created! (password hashed)");
+
+    // 👉 RUJE USER-IN
+    const user = {
+        firstname: firstname,
+        lastname: lastname,
+        username: username,
+        password: hashedPassword
+    };
+
+    localStorage.setItem("user", JSON.stringify(user));
+
+    alert("Account created successfully!");
+
+    // 👉 DËRGO TE SIGN IN
+    window.location.href = "singin.html";
 });
 </script>
-
 </body>
 </html>

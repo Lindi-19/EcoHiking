@@ -13,13 +13,37 @@ html, body {
     margin:0;
     color:var(--text);
 }
+ .hero{
+      background-color:#1e1e1e;
+      background:cover ;
+      background-position:center;
+      display:flex;
+      align-items:flex-start;
+      justify-content:center;
+    }
 
-/* hero */
-  .hero{background-size:cover;background-position:center;display:flex;align-items:flex-start;justify-content:center;}
-    
-    .hero .container{width:92%;max-width:1100px;display:flex;flex-direction:column;position:relative;z-index:2;padding-top:36px}
-    .nav{display:flex;justify-content:space-between;align-items:center;margin-bottom:40px}
-    .nav a{color:rgba(255,255,255,0.7);text-decoration:none;margin-left:20px;font-size:14px}
+    .hero .container{
+      width:92%;
+      max-width:1100px;
+      display:flex;
+      flex-direction:column;
+      position:relative;
+      z-index:2;
+      padding-top:36px
+    }
+    .nav{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      margin-bottom:40px;
+    }
+    .nav a{
+      color:rgba(255,255,255,0.7);
+      text-decoration:none;
+      margin-left:20px;
+      font-size:14px
+    }
+
 
 /* Background aesthetic */
 body {
@@ -113,7 +137,7 @@ label {
     width: auto;
 }
 
-input[type="email"], input[type="password"]{
+input[type="text"], input[type="password"]{
     width: 100%;
     padding: 12px;
     border-radius: 10px;
