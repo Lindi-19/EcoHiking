@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="sq">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://kit.fontawesome.com/fddc30fb79.js" crossorigin="anonymous"></script>
+<title>Sign In</title>
+<link rel="stylesheet" href="singin.css">
+</head>
+
+<body>
+    <header class="hero">
+    <div class="container">
+      <nav class="nav">
+        <div class="brand" style="font-weight:700;letter-spacing:2px;color:whitesmoke;">
+          <img src="images/Logo.png" alt="ECO-Hiking Logo" style="height:50px;vertical-align:middle;margin-right:8px">
+          ECO-Hiking
+        </div>
+        <div class="links">
+          <a href="index.html">Home</a>
+          <a href="guides.html">Guides</a>
+          <a href="blog.html">Blog</a>
+          <a href="contact.html">Contact</a>
+          <a href="advice.html">Advice</a>
+          
+        </div>
+      </nav>
+      </div>
+      </header>
+</section>
+</header>
+<div class="wrap">
+    <div class="card">
+        <div class="left">
+            <div class="login-box">
+                <h1>Welcome Back!</h1>
+                <p class="lead">Please enter your details</p>
+                <form id="signinForm">
+                     <div>
+                        <label for="username">Username</label>
+                        <input id="username" type="text" required>
+                    </div>
+                    <div>
+                        <label for="password">Password</label>
+                        <input id="password" type="password" required>
+                    </div>
+
+                    <label class="checkbox">
+                        <input type="checkbox">
+                        <span>Remember me for 30 days</span>
+                    </label>
+
+                    <a class="link" href="#">Forgot password?</a>
+
+                    <button type="submit" class="btn">Sign In</button>
+
+                    <p class="small">Don't have an account? <a class="link" href="register.html">Sign Up</a></p>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.getElementById("signinForm").addEventListener("submit", function(e){
+    e.preventDefault();
+
+    const email = document.getElementById("usename").value;
+    const password = document.getElementById("password").value;
+    const alertBox = document.getElementById("alertBox");
+
+    // merr user-in nga localStorage
+    const savedUser = JSON.parse(localStorage.getItem("user"));
+
+    alertBox.style.display = "block";
+
+    if (!savedUser) {
+        alertBox.className = "alert error";
+        alertBox.innerText = "❌ Nuk ekziston asnjë account. Ju lutem regjistrohuni.";
+        return;
+    }
+
+    if (email !== savedUser.usename || password !== savedUser.password) {
+        alertBox.className = "alert error";
+        alertBox.innerText = "❌ Email ose password është gabim.";
+        return;
+    }
+
+    // sukses
+    alertBox.className = "alert success";
+    alertBox.innerText = "✅ Login i suksesshëm! Duke ju dërguar në faqen kryesore...";
+
+    setTimeout(() => {
+        window.location.href = "index.html";
+    }, 1500);
+});
+</script>
+
