@@ -70,7 +70,18 @@ function loadPage(page){
 }
 
 function openGuide(date,location,price,img){
-  const url=`adventures-description.html?date=${encodeURIComponent(date)}&location=${encodeURIComponent(location)}&price=${encodeURIComponent(price)}&img=${encodeURIComponent(img)}`;
+  const url=`adventures-description.html?date=${
+  encodeURIComponent(date)
+  }
+  &location=${
+  encodeURIComponent(location)
+  }
+  &price=${
+  encodeURIComponent(price)
+  }
+  &img=${
+  encodeURIComponent(img)
+  }`;
   window.location.href=url;
 }
 
