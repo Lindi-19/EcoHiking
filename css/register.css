@@ -1,26 +1,53 @@
-:root{
-    --bg:#f6f6f7;
-    --text:#070f09;
-    --muted:#6b7280;
-    --radius:8px;
-    --shadow:0 6px 20px rgba(15,23,42,0.06);
-    font-family:"Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+:root {
+    --bg: #f6f6f7;
+    --text: #070f09;
+    --muted: #6b7280;
+    --radius: 8px;
+    --shadow: 0 6px 20px rgba(15, 23, 42, 0.06);
+    font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
 }
 
-html,body{
-    height:100%;
-    margin:0;
+html,
+body {
+    height: 100%;
+    margin: 0;
 
-    color:var(--text);
+    color: var(--text);
 }
 
 
 /* hero */
-  .hero{background-size:cover;background-position:center;display:flex;align-items:flex-start;justify-content:center;}
-    
-    .hero .container{width:92%;max-width:1100px;display:flex;flex-direction:column;position:relative;z-index:2;padding-top:36px}
-    .nav{display:flex;justify-content:space-between;align-items:center;margin-bottom:40px}
-    .nav a{color:rgba(255,255,255,0.7);text-decoration:none;margin-left:20px;font-size:14px}
+.hero {
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.hero .container {
+    width: 92%;
+    max-width: 1100px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    z-index: 2;
+    padding-top: 36px
+}
+
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px
+}
+
+.nav a {
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    margin-left: 20px;
+    font-size: 14px
+}
 
 
 
@@ -36,7 +63,7 @@ body::before {
     content: "";
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,0.45);
+    background: rgba(0, 0, 0, 0.45);
     backdrop-filter: blur(5px);
     z-index: -1;
 }
@@ -55,12 +82,12 @@ body::before {
     width: 100%;
     max-width: 1100px;
     min-height: 650px;
-    background: rgba(255,255,255,0.13);
+    background: rgba(255, 255, 255, 0.13);
     backdrop-filter: blur(16px);
     border-radius: 16px;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
     overflow: hidden;
-    border: 1px solid rgba(255,255,255,0.25);
+    border: 1px solid rgba(255, 255, 255, 0.25);
 }
 
 /* LEFT SIDE (Forma) */
@@ -75,12 +102,12 @@ body::before {
 .login-box {
     width: 100%;
     max-width: 400px;
-    background: rgba(255,255,255,0.25);
+    background: rgba(255, 255, 255, 0.25);
     padding: 35px 40px;
     border-radius: 14px;
     backdrop-filter: blur(20px);
-    border: 1px solid rgba(255,255,255,0.35);
-    box-shadow: 0 4px 18px rgba(0,0,0,0.15);
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.15);
 }
 
 .login-box h1 {
@@ -102,34 +129,37 @@ label {
     font-size: 14px;
     margin-bottom: 6px;
 }
+
 .checkbox {
-    display: flex;          
-    align-items: center;   
-    gap: 8px;           
+    display: flex;
+    align-items: center;
+    gap: 8px;
     color: #f3f3f3;
     font-size: 14px;
-    margin-bottom: 12px;    
+    margin-bottom: 12px;
 }
 
 .checkbox input {
-    width: auto;          
+    width: auto;
 }
 
 
-input, select {
+input,
+select {
     width: 100%;
     padding: 12px;
     border-radius: 10px;
-    border: 1px solid rgba(255,255,255,0.45);
-    background: rgba(255,255,255,0.35);
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    background: rgba(255, 255, 255, 0.35);
     color: #000;
     outline: none;
     margin-bottom: 12px;
 }
 
-input:focus, select:focus {
+input:focus,
+select:focus {
     border-color: #96ae69;
-    box-shadow: 0 0 0 4px rgba(150,174,105,0.25);
+    box-shadow: 0 0 0 4px rgba(150, 174, 105, 0.25);
 }
 
 /* Button */
@@ -143,7 +173,7 @@ input:focus, select:focus {
     color: white;
     font-weight: bold;
     cursor: pointer;
-    box-shadow: 0 5px 16px rgba(150,174,105,0.45);
+    box-shadow: 0 5px 16px rgba(150, 174, 105, 0.45);
     font-size: 16px;
 }
 
@@ -170,7 +200,7 @@ input:focus, select:focus {
     content: "";
     position: absolute;
     inset: 0;
-    background: linear-gradient(0deg, rgba(0,0,0,0.6), transparent 40%);
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.6), transparent 40%);
 }
 
 /* RESPONSIVE */
@@ -180,6 +210,7 @@ input:focus, select:focus {
         max-width: 92%;
         height: auto;
     }
+
     .right {
         height: 280px;
     }
